@@ -1,30 +1,20 @@
-/*
+
 public class Prueba {
 
     public static void main(String[] args) {
 
         Lector lectorTexto = new Lector("../LoR.txt");
+        String[] palabrasTexto = lectorTexto.getPalabras(); 
+        Busqueda ob = new Busqueda(palabrasTexto);
+        int n = palabrasTexto.length;
         
+        System.out.println("Busqueda del primer error: ");                
+        String resultado1 = ob.busquedaBinaria(palabrasTexto, 0, n - 1, 1);
+        System.out.println("Busqueda del segundo error: ");                
+        String resultado2 = ob.busquedaBinaria(palabrasTexto, 0, n - 1, 2);
+        System.out.println("Busqueda del tercer error: ");                
+        String resultado3 = ob.busquedaBinaria(palabrasTexto, 0, n - 1, 3);
+        System.out.println("Por último las palabras que causan error son: " + resultado1 + "," + resultado2 + "," + resultado3);    
     
-        //System.out.println(((Object)texto).getClass().getSimpleName()); Conocer el tipo de una variable
-        // boolean procesador1;
-        // boolean procesador2;
-        // boolean procesador3;
-        // String textoCompleto;
-
-        // textoCompleto = " Uno para el Señor Oscuro, sobre el trono obscuro en la Tierra de Mordor donde se extienden las Sombras. ";
-
-        // Procesador p =  new Procesador();
-
-        // procesador1 = p.procesado1(textoCompleto);
-        // procesador2 = p.procesado2("");
-        // procesador3 = p.procesado3(" Uno para el Señor Oscuro, sobre el trono obscuro en la Tierra de Mordor donde se extienden las Sombras. ");
-
-        // System.out.println("Primera funcion " + procesador1);
-        // System.out.println("Segunda funcion " + procesador2);
-        // System.out.println("Tercera funcion " + procesador3);
-
     }    
-
 }
-*/

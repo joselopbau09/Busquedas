@@ -35,36 +35,25 @@ public class Busqueda {
 		return texto;
 	}
 
-	public int busquedaBinaria(String palabras[], int izquierda, int derecha, int caso){
-		String cadena;
+	public String busquedaBinaria(String palabras[], int izquierda, int derecha, int caso){
+		String cadenaIzq, cadenaDer;
 		if (derecha >= izquierda) {
 			int mitad = izquierda + (derecha - izquierda) / 2;
 
-			if (selecionaCaso(caso, palabras[mitad]))
-				return mitad;
-
-			cadena = generaCadena(izquierda, mitad - 1);
-			if (selecionaCaso(caso, cadena))
+			if (selecionaCaso(caso, palabras[mitad])) {
+				System.out.println("\tEl error es:" + palabras[mitad] + "\n");
+				return  palabras[mitad];
+			}
+			cadenaIzq = generaCadena(izquierda, mitad - 1);
+			if (selecionaCaso(caso, cadenaIzq)) {
+				System.out.println("Se realiza la busqueda sobre la siguiente subsecuencia: " + cadenaIzq);
 				return busquedaBinaria(palabras, izquierda, mitad - 1, caso);
-
-			return busquedaBinaria(palabras, mitad + 1, derecha, caso);
+			} else {	
+				cadenaDer = generaCadena(mitad + 1, derecha + 1);
+				System.out.println("Se realiza la busqueda sobre la siguiente subsecuencia: " + cadenaDer);
+				return busquedaBinaria(palabras, mitad + 1, derecha, caso);
+			}	
 		}
-
-		return -1;
-	}
-	
-	public static void main(String args[]) {
-		Lector lectorTexto = new Lector("../LoR.txt");
-		String[] arr = lectorTexto.getPalabras(); 
-		Busqueda ob = new Busqueda(arr);
-		int n = arr.length;
-       		
-		int result = ob.busquedaBinaria(arr, 0, n - 1, 3);
-		if (result == -1)
-			System.out.println("Element not present");
-		else
-			System.out.println("Element found at index "
-							+ result);
-	}
+		return "";
+	}	
 }
-
