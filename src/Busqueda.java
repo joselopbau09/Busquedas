@@ -2,6 +2,7 @@
 public class Busqueda {
 
 	public Busqueda(){
+		Procesador p =  new Procesador();
 	}
 
 	public int busquedaBinaria(int arr[], int l, int r, int x){
