@@ -1,45 +1,59 @@
-// Java implementation of recursive Binary Search
+
 public class Busqueda {
 
-	public Busqueda(){
+	private Procesador procesador;
+
+	private String[] palabras;
+
+	public Busqueda(String[] palabras){
+		this.procesador =  new Procesador();
+		this.palabras = palabras;
 	}
 
-	public int busquedaBinaria(int arr[], int l, int r, int x){
-		if (r >= l) {
-			int mid = l + (r - l) / 2;
+	public boolean selecionaCaso(int opcion, String texto){
+		boolean seEncunetra;	
+		switch (opcion) {
+			case 1:
+				seEncunetra = this.procesador.procesado1(texto);	
+				break;
+			case 2:
+				seEncunetra = this.procesador.procesado2(texto);
+				break;
+			default:
+				seEncunetra = this.procesador.procesado3(texto);
+				break;
+		}
+		return seEncunetra;
+	}
 
-			// If the element is present at the
-			// middle itself
-			if (arr[mid] == x)
-				return mid;
-
-			// If element is smaller than mid, then
-			// it can only be present in left subarray
-			if (arr[mid] > x)
-				return busquedaBinaria(arr, l, mid - 1, x);
-
-			// Else the element can only be present
-			// in right subarray
-			return busquedaBinaria(arr, mid + 1, r, x);
+	public String generaCadena(int inicio, int fin) {
+		String texto = "";
+		for (int i = inicio; i < fin; i++) {
+			texto += palabras[i] + " ";
 		}
 
-		// We reach here when element is not present
-		// in array
-		return -1;
+		return texto;
 	}
-	/* 
-	public static void main(String args[])
-	{
-		Busqueda ob = new Busqueda();
-		int arr[] = { 2, 3, 4, 10, 40 };
-		int n = arr.length;
-		int x = 10;
-		int result = ob.busquedaBinaria(arr, 0, n - 1, x);
-		if (result == -1)
-			System.out.println("Element not present");
-		else
-			System.out.println("Element found at index "
-							+ result);
-	}*/
-}
 
+	public String busquedaBinaria(String palabras[], int izquierda, int derecha, int caso){
+		String cadenaIzq, cadenaDer;
+		if (derecha >= izquierda) {
+			int mitad = izquierda + (derecha - izquierda) / 2;
+
+			if (selecionaCaso(caso, palabras[mitad])) {
+				System.out.println("\tEl error es:" + palabras[mitad] + "\n");
+				return  palabras[mitad];
+			}
+			cadenaIzq = generaCadena(izquierda, mitad - 1);
+			if (selecionaCaso(caso, cadenaIzq)) {
+				System.out.println("Se realiza la busqueda sobre la siguiente subsecuencia: " + cadenaIzq);
+				return busquedaBinaria(palabras, izquierda, mitad - 1, caso);
+			} else {	
+				cadenaDer = generaCadena(mitad + 1, derecha + 1);
+				System.out.println("Se realiza la busqueda sobre la siguiente subsecuencia: " + cadenaDer);
+				return busquedaBinaria(palabras, mitad + 1, derecha, caso);
+			}	
+		}
+		return "";
+	}	
+}
