@@ -1,27 +1,57 @@
 // Java implementation of recursive Binary Search
 public class Busqueda {
 
-	public Busqueda(){
-		Procesador p =  new Procesador();
+	private Procesador procesador;
+
+	private String[] texto;
+
+	public Busqueda(String[] texto){
+		this.procesador =  new Procesador();
+		this.texto = texto;
 	}
 
-	public int busquedaBinaria(int arr[], int l, int r, int x){
-		if (r >= l) {
-			int mid = l + (r - l) / 2;
+	public boolean selecionaCaso(int opcion, String texto){
+		boolean seEncunetra;	
+		switch (opcion) {
+			case 1:
+				seEncunetra = this.procesador.procesado1(texto);	
+				break;
+			case 2:
+				seEncunetra = this.procesador.procesado2(texto);
+				break;
+			default:
+				seEncunetra = this.procesador.procesado3(texto);
+				break;
+		}
+		return seEncunetra;
+	}
+
+	public String generaCadena(int inicio, int fin) {
+		String fragmentoTexto = "";
+		for (int i = inicio; i < fin; i++) {
+			fragmentoTexto += texto[i] + " ";
+		}
+
+		return fragmentoTexto;
+	}
+
+	public int busquedaBinaria(int arr[], int izquierda, int derecha, int x){
+		if (derecha >= izquierda) {
+			int mitad = izquierda + (derecha - izquierda) / 2;
 
 			// If the element is present at the
-			// middle itself
-			if (arr[mid] == x)
-				return mid;
+			// mitaddle itself
+			if (arr[mitad] == x)
+				return mitad;
 
-			// If element is smaller than mid, then
+			// If element is smaller than mitad, then
 			// it can only be present in left subarray
-			if (arr[mid] > x)
-				return busquedaBinaria(arr, l, mid - 1, x);
+			if (arr[mitad] > x)
+				return busquedaBinaria(arr, izquierda, mitad - 1, x);
 
 			// Else the element can only be present
 			// in right subarray
-			return busquedaBinaria(arr, mid + 1, r, x);
+			return busquedaBinaria(arr, mitad + 1, derecha, x);
 		}
 
 		// We reach here when element is not present

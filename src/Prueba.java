@@ -4,6 +4,7 @@ public class Prueba {
     public static void main(String[] args) {
 
         Lector lectorTexto = new Lector("../LoR.txt");
+        
     
         //System.out.println(((Object)texto).getClass().getSimpleName()); Conocer el tipo de una variable
         // boolean procesador1;
