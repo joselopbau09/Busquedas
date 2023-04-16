@@ -1,9 +1,7 @@
 
 import java.io.*;
 import java.util.*;
-/**
- * Lector
- */
+
 public class Lector {
     
     private String texto;
